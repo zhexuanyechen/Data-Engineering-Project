@@ -1,11 +1,11 @@
-import mysql.connector
 import config
+from sqlalchemy import create_engine
+import pandas as pd
 
-mydb = mysql.connector.connect(
-  host=config.host,
-  user=config.user,
-  password=config.password,
-  database=config.database,
-)
+engine = create_engine(f'mysql://{config.user}:{config.password}@{config.host}/{config.database}')
 
-print(mydb)
+
+
+
+
+
