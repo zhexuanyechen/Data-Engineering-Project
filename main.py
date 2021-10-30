@@ -36,7 +36,7 @@ for filename in os.listdir(directory):
 # Clearing the directory that holds the datafiles 
 print("Removing datafiles")
 for filename in os.listdir(directory):
-    if not filename.startswith('MP'):
+    if not filename.startswith('mp'):
         os.remove(os.path.join(directory,filename))
 
 
