@@ -40,18 +40,19 @@ except Exception as error:
         if not filename.startswith('mp'):
             os.remove(os.path.join(directory,filename))
 
+# Clearing the directory that holds the datafiles 
+print("Removing datafiles")
+for filename in os.listdir(directory):
+    if not filename.startswith('mp'):
+        os.remove(os.path.join(directory,filename))
+
+
 # Applying queries to prepare data
 print("Executing queries")
 with engine.begin() as connection:
     for query in sqlqueries.queries:
         connection.execute(query)
      
-
-# Clearing the directory that holds the datafiles 
-print("Removing datafiles")
-for filename in os.listdir(directory):
-    if not filename.startswith('mp'):
-        os.remove(os.path.join(directory,filename))
 
 
 
