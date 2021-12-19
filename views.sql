@@ -238,3 +238,25 @@ VIEW `vaccination_by_province_total` AS
             AND (NOT ((`mun`.`provinceCode` LIKE 400))))
     GROUP BY `mun`.`provinceCode` , `vac`.`DOSE`
     ORDER BY `mun`.`provinceCode`
+    
+-- Political_kanton
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `Political_kanton` AS    
+    select kanton.nis5 as nis5, kanton.municipality ,
+    kanton.kanton as kanton, 
+    elect.name_first,
+    elect.name_second,
+    elect.name_third, 
+    elect.percentage_first, 
+    elect.percentage_second, 
+    elect.percentage_third
+    from mp_kantonmunicipality as kanton
+ join (select kanton as kanton, name_first as name_first, name_second as name_second, name_third as name_third,
+    concat(round((total_first/total_all * 100), 2), '%') as percentage_first,
+    concat(round((total_second/total_all * 100), 2), '%') as percentage_second,
+    concat(round((total_third/total_all * 100), 2), '%') as percentage_third
+    from mp_election_data) as elect
+    on elect.kanton = kanton.kanton
