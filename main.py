@@ -20,6 +20,7 @@ for name in sites.sites:
 try:
     print("Creating Tables")
     for filename in os.listdir(directory):
+        print(f"Creating table for file: ${filename}")
         if filename.endswith('.xlsx'):
             sheets = pd.read_excel(f"{directory}{filename}",sheet_name=None)
             if(len(sheets) > 1):
